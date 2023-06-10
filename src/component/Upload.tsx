@@ -1,4 +1,5 @@
 import React from "react"
+import { BASEURL } from "../constant/helper";
 
 
 export const Upload = () =>{
@@ -11,7 +12,7 @@ export const Upload = () =>{
         formData.append('image' , file)
   
         try{
-            const res = await fetch("/upload" , {
+            const res = await fetch(`${BASEURL}/upload` , {
                 method : "post",
                 body : formData
             })

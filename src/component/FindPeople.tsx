@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProfilesAtfind } from "./ProfilesAtfind";
 import { userDataType } from "./Home";
+import { BASEURL } from "../constant/helper";
 
 
 export type allUserType={
@@ -44,7 +45,7 @@ export const FindPeople = (props : Props) =>{
     const [allUser , setAllUser] = useState<allUserType>(initData)
 
     const fetchAllUser=async()=>{
-        const res = await fetch("/findPeople",{
+        const res = await fetch(`${BASEURL}/findPeople`,{
             method :"GET"
         });
         const data = await res.json();

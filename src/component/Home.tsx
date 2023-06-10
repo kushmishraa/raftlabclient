@@ -3,6 +3,7 @@ import { useEffect , useState} from 'react'
 import { PersonalComonent } from "./PersonalComponent"
 import { FindPeople } from "./FindPeople"
 import { ProfilePage } from "./ProfilePage"
+import { BASEURL } from "../constant/helper"
 
 
 
@@ -42,7 +43,7 @@ export const Home = () =>{
     const [homeView , setHomeView] = useState<boolean>(true);
     const fetchUserData = async () =>
         {
-            const res = await fetch("/home" , {method : "GET"});
+            const res = await fetch(`${BASEURL}/home` , {method : "GET"});
             const data = await res.json();
      
             setUserData(data);

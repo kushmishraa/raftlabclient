@@ -7,6 +7,7 @@ import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { userDataType } from './Home';
+import { BASEURL } from '../constant/helper';
 
 
 type Props = {
@@ -40,7 +41,7 @@ export const ProfilesAtfind = ( props : Props) =>{
     e.preventDefault();    
     const userName = user.username;
 
-    const res = await fetch("/followUser", {
+    const res = await fetch(`${BASEURL}/followUser`, {
       method : "POST",
       headers :{
         Accept : 'application/json',

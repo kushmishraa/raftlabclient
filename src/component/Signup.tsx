@@ -3,6 +3,7 @@ import {useState } from 'react'
 import {Box , Button, Input} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import {useNavigate} from 'react-router-dom'
+import { BASEURL } from '../constant/helper';
 
 
 type userDataType = {
@@ -25,7 +26,7 @@ export const Signup = () =>{
      
       
       try{  
-            const res = await fetch("/register-user", {
+            const res = await fetch(`${BASEURL}/register-user`, {
             method  : "POST",
             headers : {
                     Accept : "application/json",

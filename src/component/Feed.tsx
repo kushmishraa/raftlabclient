@@ -3,6 +3,7 @@ import { CreatePost, postDataType } from "./CreatePost"
 import { userDataType } from "./Home"
 import { Avatar, Button, TextareaAutosize } from "@mui/material"
 import { CommentSection } from "./CommentSection"
+import { BASEURL } from "../constant/helper"
 
 type Props={
     userData : userDataType 
@@ -25,10 +26,6 @@ export const Feed = (props : Props) =>{
             postObj.post?.map((post : any)=>transformedArray.push({...post , username : postObj.username , profilePicture : postObj.profilePicture}))
         })
 
-       
-
-
-
         userData?.userPost?.postContainer?.map( (posts:any)=>{
             transformedArray.push({...posts , profilePicture : userData.profilePicture , username : userData.username})
           // setFollowedPost([...followedPost,{...posts , profilePicture : userData.profilePicture}])
@@ -42,7 +39,7 @@ export const Feed = (props : Props) =>{
 
     const fetchAllUser = async() => {
         const user = await Promise.all(userData?.following?.map( async (username)=>{
-            const res = await fetch("/getFollowerPost",{
+            const res = await fetch(`${BASEURL}/getFollowerPost`,{
                 method : "POST",
                 headers : {
                     Accept : 'application/json',
@@ -60,7 +57,7 @@ export const Feed = (props : Props) =>{
     }
 
     const handleLike = async (username : string , image : string) =>{
-        const res = await fetch("/like",{
+        const res = await fetch(`${BASEURL}/like`,{
             method : "POST",
             headers : {
                 Accept : "application/json",

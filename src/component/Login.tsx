@@ -1,10 +1,13 @@
 import TextField from '@mui/material/TextField';
 import { Box, Button } from '@mui/material';
+import Cookies from 'universal-cookie';
 import React, { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { BASEURL } from '../constant/helper';
 
+
+const cookies = new Cookies();
 
 type userDataType = {
    email : string,
@@ -35,6 +38,7 @@ export const Login  = ()=>{
 
        const data = await res.json();
        if(res.status == 201){
+            cookies.set('jwtToken',data.token)
             navigate("/home");
        }
    

@@ -2,6 +2,7 @@ import { Button, Input, MenuItem, OutlinedInput, Select, TextareaAutosize, Theme
 import React, { useRef, useState } from "react"
 import { SelectChangeEvent } from '@mui/material/Select';
 import { userDataType } from "./Home";
+import { BASEURL } from "../constant/helper";
 
 export type postDataType = {
     caption : string,
@@ -94,7 +95,7 @@ export const CreatePost = (props : Props) =>{
         formData.append('date',date)
         
 
-        const res = await fetch("/upload" , {
+        const res = await fetch(`${BASEURL}/upload` , {
             method : "POST",
             body : formData
 

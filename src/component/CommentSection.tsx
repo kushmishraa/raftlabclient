@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import { Button, TextareaAutosize } from "@mui/material"
+import { BASEURL } from '../constant/helper'
 
 
 type Props = {
@@ -22,7 +23,7 @@ export const CommentSection = (props : Props) =>{
     }])
 
     const fetchComments = async ()=>{
-        const res = await fetch("/fetch-comments",{
+        const res = await fetch(`${BASEURL}/fetch-comments`,{
             method : "POST",
             headers : {
                 Accept : 'application/json',
@@ -41,7 +42,7 @@ export const CommentSection = (props : Props) =>{
     const addComments = async (parentUser : String , username : string , image : string , e : React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         const caption = e.currentTarget.comment.value;
-       const res = await fetch("/add-comments" , {
+       const res = await fetch(`${BASEURL}/add-comments` , {
         method : "POST",
         headers :{
             Accept : 'application/json',

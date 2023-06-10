@@ -2,6 +2,7 @@ import { Avatar, Button, TextareaAutosize } from "@mui/material"
 import React, { useEffect, useRef, useState } from 'react'
 import { userDataType } from "./Home"
 import { FindPeople } from "./FindPeople"
+import { BASEURL } from "../constant/helper"
 
 type Props = {
     userData : userDataType,
@@ -22,7 +23,7 @@ export const ProfilePage = (props : Props) =>{
         e.preventDefault();    
         const userName = username;
     
-        const res = await fetch("/followUser", {
+        const res = await fetch(`${BASEURL}/followUser`, {
           method : "POST",
           headers :{
             Accept : 'application/json',
@@ -39,7 +40,7 @@ export const ProfilePage = (props : Props) =>{
     
     const handleBioUpdate = async (e : React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        const res = await fetch("/addPost",{
+        const res = await fetch(`${BASEURL}/addPost`,{
             method : "POST",
             headers : {
                 Accept : 'application/json',
