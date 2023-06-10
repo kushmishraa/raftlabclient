@@ -1,10 +1,13 @@
 import { Feed } from "./Feed"
 import { useEffect , useState} from 'react'
+import Cookies from 'universal-cookie';
 import { PersonalComonent } from "./PersonalComponent"
 import { FindPeople } from "./FindPeople"
 import { ProfilePage } from "./ProfilePage"
 import { BASEURL } from "../constant/helper"
 
+const cookie = new Cookies();
+const jwtToken = cookie.get('jwtToken')
 
 
 export type userDataType = {
@@ -43,7 +46,15 @@ export const Home = () =>{
     const [homeView , setHomeView] = useState<boolean>(true);
     const fetchUserData = async () =>
         {
-            const res = await fetch(`${BASEURL}/home` , {method : "GET"});
+            const res = await fetch(`${BASEURL}/home` , {
+                method : "POST",
+                headers : {
+                    Accept : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({jwtToken})
+            
+            });
             const data = await res.json();
      
             setUserData(data);
