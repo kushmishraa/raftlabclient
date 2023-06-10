@@ -8,6 +8,9 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { userDataType } from './Home';
 import { BASEURL } from '../constant/helper';
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
+const jwtToken = cookie.get('jwtToken');
 
 
 type Props = {
@@ -48,7 +51,8 @@ export const ProfilesAtfind = ( props : Props) =>{
         'Content-Type' : 'application/json'
       },
       body : JSON.stringify({
-        "username":userName
+        "username":userName,
+        "jwtToken" : jwtToken
     }),
     credentials : 'include'
     })
