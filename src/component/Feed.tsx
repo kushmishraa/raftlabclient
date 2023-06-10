@@ -41,7 +41,7 @@ export const Feed = (props : Props) =>{
     }
 
     const fetchAllUser = async() => {
-        const user = await Promise.all(userData.following.map( async (username)=>{
+        const user = await Promise.all(userData?.following?.map( async (username)=>{
             const res = await fetch("/getFollowerPost",{
                 method : "POST",
                 headers : {

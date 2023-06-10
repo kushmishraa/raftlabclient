@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material';
 import React, { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { BASEURL } from '../constant/helper';
 
 
 type userDataType = {
@@ -19,7 +20,7 @@ export const Login  = ()=>{
      
        
        try{
-        const res = await fetch("/login-validation" , {
+        const res = await fetch(`${BASEURL}/login-validation` , {
         method : "POST",
         headers : {
             Accept : "application/json",

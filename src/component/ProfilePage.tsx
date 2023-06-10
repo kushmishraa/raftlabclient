@@ -109,7 +109,7 @@ export const ProfilePage = (props : Props) =>{
                 </div>
             </form>
             </div>
-            <div className="w-full h-full flex flex-col items-center gap-10 justify-center">
+            <div className="w-full flex flex-col items-center gap-10 justify-center">
             {userData.userPost.postContainer.length >= 1 ? userData.userPost.postContainer.map((posts : any)=>{
                 return(
                     <>

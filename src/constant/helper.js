@@ -1,1 +1,1 @@
-export const BASEURL = ""
+export const BASEURL = "https://raftlabserver.onrender.com"
