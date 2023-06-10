@@ -3,6 +3,9 @@ import React, { useRef, useState } from "react"
 import { SelectChangeEvent } from '@mui/material/Select';
 import { userDataType } from "./Home";
 import { BASEURL } from "../constant/helper";
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
+const jwtToken = cookie.get('jwtToken')
 
 export type postDataType = {
     caption : string,
@@ -93,6 +96,7 @@ export const CreatePost = (props : Props) =>{
         formData.append('caption',caption)
         formData.append('tagged',tagged)
         formData.append('date',date)
+        formData.append('jwtToken',jwtToken)
         
 
         const res = await fetch(`${BASEURL}/upload` , {
