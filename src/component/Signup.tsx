@@ -63,7 +63,7 @@ export const Signup = () =>{
         formData.append('isProfilePic' , "true");
         formData.append('email' , email)
         formData.append('jwtToken' , jwtToken);
-        const res = await fetch('/upload',{
+        const res = await fetch(`${BASEURL}/upload`,{
             method : "POST",
             body : formData
         })
