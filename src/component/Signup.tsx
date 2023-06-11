@@ -4,6 +4,9 @@ import {Box , Button, Input} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import {useNavigate} from 'react-router-dom'
 import { BASEURL } from '../constant/helper';
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
+const jwtToken = cookie.get('jwtToken')
 
 
 type userDataType = {
@@ -59,6 +62,7 @@ export const Signup = () =>{
         formData.append('image' , e.currentTarget.image.files[0]);
         formData.append('isProfilePic' , "true");
         formData.append('email' , email)
+        formData.append('jwtToken' , jwtToken);
         const res = await fetch('/upload',{
             method : "POST",
             body : formData

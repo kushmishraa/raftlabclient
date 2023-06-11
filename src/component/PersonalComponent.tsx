@@ -15,7 +15,7 @@ const homeView = props.homeView
         <div className="w-full h-screen flex flex-col justify-center">
             <div>
               <div>
-                {userData.profilePicture.length > 0 ?<img src={userData.profilePicture} /> : 
+                {userData?.profilePicture?.length > 0 ?<img src={userData.profilePicture} /> : 
                 <Skeleton
                   variant="rectangular"
                   width={307}
@@ -23,7 +23,7 @@ const homeView = props.homeView
                   /> }
               </div>
               <div>
-                <Button variant = "outlined" sx={{width : "100%"}} onClick={()=>setHomeView(!homeView)}>{userData.profilePicture.length > 0 ? homeView ? "Profile" : "Home": <CircularProgress />}</Button>
+                <Button variant = "outlined" sx={{width : "100%"}} onClick={()=>setHomeView(!homeView)}>{userData?.profilePicture?.length > 0 ? homeView ? "Profile" : "Home": <CircularProgress />}</Button>
               </div>
             </div>
         </div>
