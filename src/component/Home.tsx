@@ -42,6 +42,7 @@ export const Home = () =>{
         following : [""],
         bio : ""
     }
+    
     const [userData  , setUserData] = useState<userDataType>(initData) ;
     const [homeView , setHomeView] = useState<boolean>(true);
     const fetchUserData = async () =>
@@ -68,15 +69,15 @@ export const Home = () =>{
         <div className="flex flex-row  bg-slate-200 w-full  h-screen items-center justify-between">
            
             <div className="bg-white h-full w-[20%] drop-shadow-xl">
-                <PersonalComonent userData={userData} setHomeview={ setHomeView } homeView={homeView}/>
+                <PersonalComonent userData={userData} setHomeview={ setHomeView } homeView={homeView} setUserData = {fetchUserData}/>
             </div>
 
             <div className="bg-white h-full w-[50%] drop-shadow-2xl">
-                { !homeView  ? <ProfilePage userData = {userData} setHomeView={setHomeView} /> : <Feed userData={userData}/>}
+                { !homeView  ? <ProfilePage userData = {userData} setHomeView={setHomeView} setUserData={fetchUserData}/> : <Feed userData={userData} setUserData={fetchUserData}/>}
             </div>
 
             <div className="bg-white h-full w-[20%] drop-shadow-xl">
-                <FindPeople userData = {userData} />
+                <FindPeople userData = {userData} setUserData = {fetchUserData}/>
             </div>
 
         </div>  

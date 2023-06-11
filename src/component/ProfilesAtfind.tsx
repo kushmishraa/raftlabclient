@@ -9,6 +9,7 @@ import Sheet from '@mui/joy/Sheet';
 import { userDataType } from './Home';
 import { BASEURL } from '../constant/helper';
 import Cookies from 'universal-cookie';
+import { CircularProgress, LinearProgress } from '@mui/material';
 const cookie = new Cookies();
 const jwtToken = cookie.get('jwtToken');
 
@@ -25,23 +26,26 @@ type Props = {
     username : string
   },
   userData : userDataType,
-  isProfilePage ?: boolean
+  isProfilePage ?: boolean,
+  setUserData : Function
 }
 
 
 
 export const ProfilesAtfind = ( props : Props) =>{
-  const {user} = props
+  const {user , setUserData} = props
   const alreadyFollowing = props.userData?.following?.indexOf(user.username);
   const posts = user.userPost.postContainer.length
   const following = user.following.length;
+  const [loading , setLoading] = useState<boolean>(false)
 
   const isProfilePage = props.isProfilePage;
 
   const [followed , setFollowing] = useState<boolean>(false)
 
   const followUser = async (e : React.FormEvent<HTMLFormElement>) =>{
-    e.preventDefault();    
+    e.preventDefault();   
+    setLoading(true); 
     const userName = user.username;
 
     const res = await fetch(`${BASEURL}/followUser`, {
@@ -57,8 +61,9 @@ export const ProfilesAtfind = ( props : Props) =>{
     credentials : 'include'
     })
     const data = await res.json();
-   
+    setUserData()
     setFollowing(!followed);
+    setLoading(false)
   }
 
   const FollowingCard = () =>{
@@ -116,9 +121,11 @@ export const ProfilesAtfind = ( props : Props) =>{
               </div>
             </Sheet>
             <Box sx={{ display: 'flex', gap: 1.5, '& > button': { flex: 1 } }}>
+              {loading ? <div className='flex w-full justify-center'><CircularProgress /></div> : 
               <Button variant="solid" color="primary" type='submit'>
                 {followed ? "Unfollow" : "Follow"}
               </Button>
+              }
             </Box>
           </CardContent>
         </Card>

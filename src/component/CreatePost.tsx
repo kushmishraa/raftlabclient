@@ -24,11 +24,12 @@ export type postDataType = {
 }
 
 type Props={
-  userData : userDataType
+  userData : userDataType,
+  setUserData : Function
 }
 
 export const CreatePost = (props : Props) =>{
-  
+  const {setUserData} = props
     const [post , setPost] = useState<postDataType>({
         caption : "",
         image : "",
@@ -104,7 +105,8 @@ export const CreatePost = (props : Props) =>{
             body : formData
 
         })
-        const data = await res.json()
+        const data = await res.json();
+        setUserData();
     }
 
     const handleFormSubmit = (e : React.FormEvent<HTMLFormElement>) =>{
@@ -130,7 +132,7 @@ export const CreatePost = (props : Props) =>{
          onChange={handleCaption}
          name="caption" />
          <div className="flex gap-2 h-11">
-         <Input type="file" name="image"/>
+         <Input type="file" name="image" required />
          <Select
           multiple
           displayEmpty

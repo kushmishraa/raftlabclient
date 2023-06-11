@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ProfilesAtfind } from "./ProfilesAtfind";
 import { userDataType } from "./Home";
 import { BASEURL } from "../constant/helper";
+import { Skeleton } from "@mui/material";
 
 
 export type allUserType={
@@ -19,12 +20,13 @@ export type allUserType={
 
 type Props = {
     userData : userDataType,
-    isProfilePage ?: boolean
+    isProfilePage ?: boolean,
+    setUserData : Function
 }
 
 export const FindPeople = (props : Props) =>{
 
-    const { userData } = props
+    const { userData , setUserData } = props
 
     const isProfilePage = props?.isProfilePage
 
@@ -57,15 +59,16 @@ export const FindPeople = (props : Props) =>{
     },[])
     return(
         <div className="w-full h-screen gap flex flex-col justify-evenly items-center">
+
            <div className="h-50%">
                 <h1>Who to Follow ?</h1>
             </div>
             <div className="overflow-y-scroll">
-                {Object.keys(allUser).length == 0 ? null : allUser.users.map((user)=>{ 
-                    return userData.username == user.username ? null : <ProfilesAtfind user={user} userData = {userData} isProfilePage={isProfilePage}/>
+                {allUser.users.length == 1 ? <Skeleton variant="rounded" width={250} height={286}/> : allUser.users.map((user)=>{ 
+                    return userData.username == user.username ? null : <ProfilesAtfind user={user} userData = {userData} isProfilePage={isProfilePage} setUserData={setUserData}/>
                 })}
-               
             </div>
+
         </div>
     )
 }

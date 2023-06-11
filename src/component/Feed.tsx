@@ -1,18 +1,18 @@
 import { useState , useEffect, useRef } from "react"
 import { CreatePost, postDataType } from "./CreatePost"
 import { userDataType } from "./Home"
-import { Avatar, Button, TextareaAutosize } from "@mui/material"
+import { Avatar, Button, Skeleton, Stack, TextareaAutosize } from "@mui/material"
 import { CommentSection } from "./CommentSection"
 import { BASEURL } from "../constant/helper"
 
 type Props={
-    userData : userDataType 
+    userData : userDataType,
+    setUserData : Function
 }
 export const Feed = (props : Props) =>{
-
+    const {userData , setUserData} = props;
     const commentSectionRef = useRef<HTMLDivElement>(null)
     const [forceRender , setForceRender] = useState<boolean>(true)
-    const {userData} = props;
     const [followedPosts , setFollowedPost] = useState<Array<postDataType>>([]);
     const [selectedComments , setSelectedComments] = useState<{
         username : string,
@@ -88,7 +88,7 @@ export const Feed = (props : Props) =>{
         <div className="w-full h-full flex flex-col justify-center items-center overflow-y-scroll relative">
             {/* creating post */}
             <div className="w-full">
-                <CreatePost userData={userData}/>
+                <CreatePost userData={userData} setUserData={setUserData}/>
             </div>
 
             {/*user posts */}
@@ -120,7 +120,12 @@ export const Feed = (props : Props) =>{
                             </>
                         )
                     })
-                    : null
+                    : <Stack spacing={1}>
+                    {/* For variant="text", adjust the height via font-size */}
+                    {/* For other variants, adjust the size with `width` and `height` */}
+                    <Skeleton variant="circular" width={40} height={40} />
+                    <Skeleton variant="rectangular" width={512} height={584} />
+                  </Stack>
                 }
             </div>
             {/*Comments*/}

@@ -110,7 +110,8 @@ export const Signup = () =>{
                     
                     <Input
                     type="file"
-                    name='image' />
+                    name='image'
+                    required />
                     
                     <TextField
                     required

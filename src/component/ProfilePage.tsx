@@ -3,15 +3,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { userDataType } from "./Home"
 import { FindPeople } from "./FindPeople"
 import { BASEURL } from "../constant/helper"
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
+const jwtToken = cookie.get('jwtToken')
 
 type Props = {
     userData : userDataType,
     setHomeView : Function,
+    setUserData : Function
 }
 
 export const ProfilePage = (props : Props) =>{
 
-    const {userData} = props
+    const {userData , setUserData} = props
     const [bioEditable , setBioEditable] = useState<boolean>(false);
     const [showFollowing , setShowFollowing] = useState<boolean>(false);
     const [following , setFollowing] = useState<Number>(userData.following.length)
@@ -30,12 +34,15 @@ export const ProfilePage = (props : Props) =>{
             'Content-Type' : 'application/json'
           },
           body : JSON.stringify({
-            "username":userName
+            "username":userName,
+            "jwtToken":jwtToken
         }),
         credentials : 'include'
         })
         const data = await res.json();
-       handleShowFollowing()
+        handleShowFollowing();
+        setUserData();
+        
       }
     
     const handleBioUpdate = async (e : React.FormEvent<HTMLFormElement>)=>{
